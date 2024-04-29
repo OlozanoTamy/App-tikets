@@ -2,7 +2,8 @@ import EventItem from "./components";
 import useEventsData from "../../hooks/useEventsData";
 
 const Events = ({ searchTerm }) => {
-  const { events } = useEventsData();
+  //Se instancia el objeto event  apartir del hook creado
+  const { events, isLoading, error } = useEventsData();
   const handleEventItemClick = (id) => {
     console.log("Boton Clickeado: ", id);
   };
@@ -15,6 +16,15 @@ const Events = ({ searchTerm }) => {
         event.name.toLowerCase().includes(searchTerm)
       );
     }
+
+    if (error) {
+      return <>Ha ocurrido un Error</>;
+    }
+
+    if (isLoading) {
+      return <div>Cargando Resultados....</div>;
+    }
+
     return eventsFiltered.map((evento) => (
       <EventItem
         key={`event-item-${evento.id}`}
