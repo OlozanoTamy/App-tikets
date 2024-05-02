@@ -1,11 +1,14 @@
 import EventItem from "./components";
 import useEventsData from "../../hooks/useEventsData";
+import { useNavigate } from "react-router-dom";
 
 const Events = ({ searchTerm }) => {
   //Se instancia el objeto event  apartir del hook creado
   const { events, isLoading, error } = useEventsData();
+  const navigate = useNavigate();
+
   const handleEventItemClick = (id) => {
-    console.log("Boton Clickeado: ", id);
+    navigate(`/detail/${id}`);
   };
 
   const renderEvent = () => {
